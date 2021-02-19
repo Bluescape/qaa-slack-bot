@@ -2,7 +2,7 @@
   "name": "qaa-slack-bot",
   "version": "0.0.1",
   "description": "",
-  "main": "ccc.js",
+  "main": "index.js",
   "author": "Fiona Hu",
   "repository": {
     "type": "git"
