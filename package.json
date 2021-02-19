@@ -1,0 +1,36 @@
+{
+  "name": "qaa-slack-bot",
+  "version": "0.0.1",
+  "description": "",
+  "main": "ccc.js",
+  "author": "Fiona Hu",
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "comment",
+    "message",
+    "actions",
+    "pull-request",
+    "jest"
+  ],
+  "scripts": {
+    "test": "jest --silent",
+    "lint": "eslint src/ --quiet",
+    "lint-fix": "eslint src/**/*.js --quiet --fix"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/exec": "^1.0.3",
+    "@actions/github": "^1.1.0",
+    "jest": "^25.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
