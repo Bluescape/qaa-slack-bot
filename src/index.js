@@ -8,13 +8,15 @@ const RUN_STATUS = 'notarealstatus'
 const BRANCH = 'notarealbranch'
 const GH_RUN_ID = 'notarealrunid'
 */
-const main = async () => {
+const main = async () => { 
+  console.log("Hello this is in the beginning of main")
   const webhookUrl = core.getInput('webhook')
   const BLUESCAPE_URL = core.getInput('bluescape_url')
   const RUN_STATUS = core.getInput('run_status')
   const BRANCH = core.getInput('branch')
   const GH_RUN_ID = core.getInput('gh_run_id')
   const webhook = new IncomingWebhook(webhookUrl)
+  console.logR("Hello this is right beforet he webhook sends")
   await webhook.send({
     blocks: [
       {
