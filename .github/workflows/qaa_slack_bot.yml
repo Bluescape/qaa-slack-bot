@@ -16,3 +16,5 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: npm install
+      - name: Run script 
+        run: npm start

@@ -17,7 +17,8 @@
   "scripts": {
     "test": "jest --silent",
     "lint": "eslint src/ --quiet",
-    "lint-fix": "eslint src/**/*.js --quiet --fix"
+    "lint-fix": "eslint src/**/*.js --quiet --fix",
+    "start" : "node src/index.js"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
