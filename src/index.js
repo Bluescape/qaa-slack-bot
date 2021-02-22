@@ -16,6 +16,7 @@ const main = async () => {
   const BRANCH = core.getInput('branch')
   const GH_RUN_ID = core.getInput('gh_run_id')
   const webhook = new IncomingWebhook(webhookUrl)
+  console.log(`WebhookUrl: ${webhookUrl}`)
   console.log("Hello this is right beforet he webhook sends")
   await webhook.send({
     blocks: [
