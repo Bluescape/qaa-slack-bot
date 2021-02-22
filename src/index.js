@@ -17,11 +17,11 @@ const main = async () => {
   const GH_RUN_ID = core.getInput('gh_run_id')
   const GH_REPO_LINK = core.getInput('gh_repo_link')
   const TESTRAIL_PROJECT_ID = core.getInput('testrail_project_id') || undefined
+  let PACKAGE = core.getInput('package') || undefined
 
   const context = github.context
   const GH_REPO_NAME = context.repo.repo
   const BRANCH = context.payload.pull_request.head.ref
-
 
   const webhook = new IncomingWebhook(webhookUrl)
 
@@ -34,7 +34,7 @@ const main = async () => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: ${GH_REPO_NAME} \nPackage: \`e2e-webc\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
+          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: ${GH_REPO_NAME} \nPackage: \`${PACKAGE}\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
         }
       },
       {
@@ -90,6 +90,10 @@ const main = async () => {
       value: 'click_me',
       url: `https://testrail.bluescape.com/index.php?/projects/overview/${TESTRAIL_PROJECT_ID}`
     })
+  }
+
+  if (!PACKAGE) {
+    PACKAGE = 'some test package'
   }
 
   console.log(`WebhookUrl: ${webhookUrl}`)
