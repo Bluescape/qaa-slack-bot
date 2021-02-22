@@ -20,9 +20,6 @@ inputs:
   gh_run_id: 
     description: "Github run ID"
     required: true
-  webhook_url: 
-    description: "Slack webhook URL"
-    required: true
 runs: 
   using: "node12"
   main: "src/index.js"
