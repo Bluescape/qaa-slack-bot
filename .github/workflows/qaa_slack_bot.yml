@@ -23,4 +23,4 @@ jobs:
           gh_run_id: "some_run_id"
           branch: "some_test_branch"
           run_status: "passed"
-          bluescape_url: "stg1.bluescape.com"
+          bluescape_url: "abc"
