@@ -21,7 +21,8 @@ const main = async () => {
 
   const context = github.context
   const GH_REPO_NAME = context.repo.repo
-  console.log(JSON.stringify(context))
+  const GH_BRANCH_NAME = context.payload.pull_request.head.ref
+  console.log(GH_BRANCH_NAME)
 
   const webhook = new IncomingWebhook(webhookUrl)
 
