@@ -6,4 +6,4 @@ const main = async () => {
   console.log("Hello world")
 }
 
-main().catch((err) => core.setFailed(err.message));
+main().catch((err) => core.setFailed(err.message))
