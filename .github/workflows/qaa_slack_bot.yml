@@ -17,4 +17,10 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run script 
-        run: npm start
+        uses: ./
+        with: 
+          webhook: ${{ env.SLACK_WEBHOOK_URL }}
+          gh_run_id: "1"
+          branch: "some_test_branch"
+          run_status: "passed"
+          bluescape_url: "some_url_goes_here"
