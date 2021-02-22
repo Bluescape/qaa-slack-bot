@@ -15,6 +15,7 @@ const main = async () => {
   const RUN_STATUS = core.getInput('run_status')
   const BRANCH = core.getInput('branch')
   const GH_RUN_ID = core.getInput('gh_run_id')
+  const GH_REPO_LINK= core.getInput('gh_repo_link')
   const webhook = new IncomingWebhook(webhookUrl)
 
   console.log(`WebhookUrl: ${webhookUrl}`)
@@ -67,7 +68,7 @@ const main = async () => {
               emoji: true
             },
             value: 'click_me',
-            url: 'https://github.com/Bluescape/thoughtstream-browser_client'
+            url: `${GH_REPO_LINK}`
           }
         ]
       },

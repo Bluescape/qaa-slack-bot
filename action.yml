@@ -20,6 +20,12 @@ inputs:
   gh_run_id: 
     description: "Github run ID"
     required: true
+  gh_repo_link: 
+    description: "Repository link"
+    required: true
+  testrail_project_id:
+    description: "Testrail project id"
+    required: false
 runs: 
   using: "node12"
   main: "src/index.js"
