@@ -14,15 +14,14 @@ const main = async () => {
   const webhookUrl = core.getInput('webhook')
   const BLUESCAPE_URL = core.getInput('bluescape_url')
   const RUN_STATUS = core.getInput('run_status')
-  const BRANCH = core.getInput('branch')
   const GH_RUN_ID = core.getInput('gh_run_id')
   const GH_REPO_LINK = core.getInput('gh_repo_link')
   const TESTRAIL_PROJECT_ID = core.getInput('testrail_project_id') || undefined
 
   const context = github.context
   const GH_REPO_NAME = context.repo.repo
-  const GH_BRANCH_NAME = context.payload.pull_request.head.ref
-  console.log(GH_BRANCH_NAME)
+  const BRANCH = context.payload.pull_request.head.ref
+
 
   const webhook = new IncomingWebhook(webhookUrl)
 
