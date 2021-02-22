@@ -24,4 +24,4 @@ jobs:
           branch: "some_test_branch"
           run_status: "passed"
           bluescape_url: "abc"
-          gh_repo_link: "github.com/Bluescape/qaa-slack-bot/"
+          gh_repo_link: "http://github.com/Bluescape/qaa-slack-bot/"
