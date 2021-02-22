@@ -92,7 +92,7 @@ const main = async () => {
     })
   }
 
-  if (!PACKAGE) {
+  if (PACKAGE === undefined) {
     PACKAGE = 'some test package'
   }
 
