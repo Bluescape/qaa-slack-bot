@@ -25,3 +25,4 @@ jobs:
           run_status: "passed"
           bluescape_url: "abc"
           gh_repo_link: "http://github.com/Bluescape/qaa-slack-bot/"
+          testrail_project_id: "15"
