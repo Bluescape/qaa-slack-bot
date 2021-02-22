@@ -1,4 +1,5 @@
 const core = require('@actions/core')
+const github = require('@actions/github')
 const { IncomingWebhook } = require('@slack/webhook')
 
 /*
@@ -17,6 +18,10 @@ const main = async () => {
   const GH_RUN_ID = core.getInput('gh_run_id')
   const GH_REPO_LINK = core.getInput('gh_repo_link')
   const TESTRAIL_PROJECT_ID = core.getInput('testrail_project_id') || undefined
+
+  const context = github.context
+  const GH_REPO_NAME = context.repo
+
   const webhook = new IncomingWebhook(webhookUrl)
 
   const slackMessage = {
@@ -28,7 +33,7 @@ const main = async () => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: \`browser_client\` \nPackage: \`e2e-webc\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
+          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: ${GH_REPO_NAME} \nPackage: \`e2e-webc\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
         }
       },
       {
