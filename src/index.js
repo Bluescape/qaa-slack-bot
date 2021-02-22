@@ -20,7 +20,8 @@ const main = async () => {
   const TESTRAIL_PROJECT_ID = core.getInput('testrail_project_id') || undefined
 
   const context = github.context
-  const GH_REPO_NAME = context.repo
+  const GH_REPO_NAME = context.repo()
+  console.log(GH_REPO_NAME)
 
   const webhook = new IncomingWebhook(webhookUrl)
 
