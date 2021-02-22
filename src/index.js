@@ -48,16 +48,6 @@ const main = async () => {
             },
             value: 'click_me',
             url: `https://github.com/Bluescape/thoughtstream-browser_client/actions/runs/${GH_RUN_ID}`
-          },
-          {
-            type: 'button',
-            text: {
-              type: 'plain_text',
-              text: 'Bluescape Environment',
-              emoji: true
-            },
-            value: 'click_me',
-            url: `https://client.${BLUESCAPE_URL}/my`
           }
         ]
       },
