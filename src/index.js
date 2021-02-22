@@ -1,8 +1,9 @@
 const core = require('@actions/core')
 const { IncomingWebhook } = require('@slack/webhook')
 
-/*
+
 const webhookUrl = 'https://hooks.slack.com/services/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'
+/*
 const BLUESCAPE_URL = 'notarealurl'
 const RUN_STATUS = 'notarealstatus'
 const BRANCH = 'notarealbranch'
@@ -10,7 +11,7 @@ const GH_RUN_ID = 'notarealrunid'
 */
 const main = async () => { 
   console.log("Hello this is in the beginning of main")
-  const webhookUrl = core.getInput('webhook')
+//  const webhookUrl = core.getInput('webhook')
   const BLUESCAPE_URL = core.getInput('bluescape_url')
   const RUN_STATUS = core.getInput('run_status')
   const BRANCH = core.getInput('branch')
