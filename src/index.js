@@ -15,76 +15,75 @@ const main = async () => {
   const RUN_STATUS = core.getInput('run_status')
   const BRANCH = core.getInput('branch')
   const GH_RUN_ID = core.getInput('gh_run_id')
-  const GH_REPO_LINK= core.getInput('gh_repo_link')
+  const GH_REPO_LINK = core.getInput('gh_repo_link')
   const TESTRAIL_PROJECT_ID = core.getInput('testrail_project_id') || undefined
   const webhook = new IncomingWebhook(webhookUrl)
 
-  let slack_message = {
+  const slackMessage = {
     blocks: [
-        {
-          type: 'divider'
-        },
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: \`browser_client\` \nPackage: \`e2e-webc\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
-          }
-        },
-        {
-          type: 'actions',
-          elements: [
-            {
-              type: 'button',
-              style: 'primary',
-              text: {
-                type: 'plain_text',
-                text: 'GitHub Run',
-                emoji: true
-              },
-              value: 'click_me',
-              url: `https://github.com/Bluescape/thoughtstream-browser_client/actions/runs/${GH_RUN_ID}`
-            },
-            {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'Bluescape Environment',
-                emoji: true
-              },
-              value: 'click_me',
-              url: `https://client.${BLUESCAPE_URL}/my`
-            },
-            {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'Repository',
-                emoji: true
-              },
-              value: 'click_me',
-              url: `${GH_REPO_LINK}`
-            }
-          ]
-        },
-        {
-          type: 'divider'
+      {
+        type: 'divider'
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: \`browser_client\` \nPackage: \`e2e-webc\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
         }
-      ]
-    }
+      },
+      {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            style: 'primary',
+            text: {
+              type: 'plain_text',
+              text: 'GitHub Run',
+              emoji: true
+            },
+            value: 'click_me',
+            url: `https://github.com/Bluescape/thoughtstream-browser_client/actions/runs/${GH_RUN_ID}`
+          },
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: 'Bluescape Environment',
+              emoji: true
+            },
+            value: 'click_me',
+            url: `https://client.${BLUESCAPE_URL}/my`
+          },
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: 'Repository',
+              emoji: true
+            },
+            value: 'click_me',
+            url: `${GH_REPO_LINK}`
+          }
+        ]
+      },
+      {
+        type: 'divider'
+      }
+    ]
   }
 
   if (TESTRAIL_PROJECT_ID) {
-      slack_message.blocks[2].elements.push({
-          type: 'button',
-          text: {
-              type: 'plain_text',
-              text: 'TestRail Project',
-              emoji: true
-          }, 
-          value: 'click_me', 
-          url: `https://testrail.bluescape.com/index.php?/projects/overview/${TESTRAIL_PROJECT_ID}`
-      })
+    slackMessage.blocks[2].elements.push({
+      type: 'button',
+      text: {
+        type: 'plain_text',
+        text: 'TestRail Project',
+        emoji: true
+      },
+      value: 'click_me',
+      url: `https://testrail.bluescape.com/index.php?/projects/overview/${TESTRAIL_PROJECT_ID}`
+    })
   }
 
   console.log(`WebhookUrl: ${webhookUrl}`)
@@ -93,7 +92,7 @@ const main = async () => {
   console.log(`BRANCH: ${BRANCH}`)
   console.log(`GH_RUN_ID: ${GH_RUN_ID}`)
   console.log('Hello this is right beforet he webhook sends')
-  await webhook.send(slack_message)
+  await webhook.send(slackMessage)
   console.log('Hello world')
 }
 
