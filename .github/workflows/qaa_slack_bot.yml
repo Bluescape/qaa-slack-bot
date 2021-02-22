@@ -19,8 +19,8 @@ jobs:
       - name: Run script 
         uses: ./
         with: 
-          webhook: ${{ env.SLACK_WEBHOOK_URL }}
-          gh_run_id: "1"
+          webhook: "${{ env.SLACK_WEBHOOK_URL }}"
+          gh_run_id: "some_run_id"
           branch: "some_test_branch"
           run_status: "passed"
           bluescape_url: "some_url_goes_here"
