@@ -14,12 +14,9 @@ inputs:
   run_status:
     description: "Run status"
     required: true
-  gh_run_id:
-    description: "Github run ID"
-    required: true
   package: 
     description: "Package name"
-    required: true
+    required: false
   testrail_project_id:
     description: "Testrail project id"
     required: false
