@@ -1,5 +1,5 @@
 name: QAA-slack-poster
-on: [pull_request]
+on: [pull_request, repository_dispatch]
 
 env: 
   node-version: 12.x
@@ -9,6 +9,10 @@ jobs:
   post-to-slack:
     runs-on: ubuntu-latest
     steps: 
+      - name: Dump Github context
+        env: 
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v1
@@ -22,7 +26,6 @@ jobs:
           webhook: ${{ env.SLACK_WEBHOOK_URL }}
           gh_run_id: ${{ github.run_id }}
           run_status: "passed"
-          bluescape_url: "abc"
+          bluescape_url: "stg1.bluescape.com"
           testrail_project_id: "15"
           package: "Some made up package"
-          
