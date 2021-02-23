@@ -16,6 +16,8 @@ const main = async () => {
   const ghRepoLink = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
+  console.log('context.repo: ', JSON.stringify(context.repeo))
+
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
   testText.push(makeTestLine('Environment', bluescapeUrl))
@@ -29,8 +31,6 @@ const main = async () => {
   blocks.push(makeLinkBlock('Repository', ghRepoLink))
   if (testrailProjectId) blocks.push(makeLinkBlock('Testrail Project', `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`))
 
-  console.log(testText)
-  console.log(blocks)
   const slackMessage = {
     blocks: [
       {
