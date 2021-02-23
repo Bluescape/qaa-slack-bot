@@ -36,7 +36,7 @@ const main = async () => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: ${GH_REPO_NAME} \nPackage: \`${PACKAGE}\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
+          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: \'${GH_REPO_NAME}\' \nPackage: \`${PACKAGE}\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
         }
       },
       {
