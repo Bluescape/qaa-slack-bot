@@ -24,13 +24,10 @@ const main = async () => {
   const GH_REPO_NAME = context.repo.repo
   const BRANCH = context.payload.pull_request.head.ref
   const GH_REPO_LINK = context.payload.repository.html_url
-  const GH_SHA = context.payload.after
   const webhook = new IncomingWebhook(webhookUrl)
 
-
-
-  const status = await octokit.request(`GET /repos/Bluescape/${GH_REPO_NAME}/commits/${GH_SHA}/status`) 
-  console.log(JSON.stringify(status))
+  const GH_RUN = await octokit.request(`GET /repos/Bluescape/${GH_REPO_NAME}/actions/runs/${GH_RUN_ID}`)
+  console.log(JSON.stringify(GH_RUN))
   if (PACKAGE === undefined) {
     PACKAGE = 'Package was not defined!'
   }
