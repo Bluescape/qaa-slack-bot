@@ -25,4 +25,3 @@ jobs:
           bluescape_url: "abc"
           gh_repo_link: "https://github.com/Bluescape/qaa-slack-bot/"
           testrail_project_id: "15"
-          package: "some package name"

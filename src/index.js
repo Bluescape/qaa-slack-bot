@@ -95,6 +95,7 @@ const main = async () => {
   if (PACKAGE === undefined) {
     PACKAGE = 'some test package'
   }
+  console.log(PACKAGE);
 
   console.log(`WebhookUrl: ${webhookUrl}`)
   console.log(`BLUESCAP_URL: ${BLUESCAPE_URL}`)
