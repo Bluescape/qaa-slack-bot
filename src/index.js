@@ -1,5 +1,6 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
+const _ = require('lodash')
 const { IncomingWebhook } = require('@slack/webhook')
 
 const main = async () => {
@@ -12,7 +13,7 @@ const main = async () => {
 
   const context = github.context
   const ghRepoName = context.repo.repo
-  const ghBranch = context.payload.pull_request.head.ref
+  const ghBranch = _.get(context, ['ref']) || _.get(context, ['payload', 'pull_request', 'head', 'ref'])
   const ghRepoLink = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
