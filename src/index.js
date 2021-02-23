@@ -7,11 +7,11 @@ const main = async () => {
   const webhookUrl = core.getInput('webhook')
   const bluescapeUrl = core.getInput('bluescape_url')
   const runStatus = core.getInput('run_status') || undefined
-  const ghRunId = core.getInput('gh_run_id')
   const testrailProjectId = core.getInput('testrail_project_id') || undefined
   const ghPackage = core.getInput('package') || undefined
 
   const context = github.context
+  const ghRunId = context.runId
   const ghRepoName = context.repo.repo
   const ghBranch = _.get(context, ['ref']) || _.get(context, ['payload', 'pull_request', 'head', 'ref'])
   const ghRepoLink = context.payload.repository.html_url
