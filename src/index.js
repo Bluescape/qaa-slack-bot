@@ -2,30 +2,32 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 const { IncomingWebhook } = require('@slack/webhook')
 
-/*
-const webhookUrl = 'https://hooks.slack.com/services/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'
-const BLUESCAPE_URL = 'notarealurl'
-const RUN_STATUS = 'notarealstatus'
-const BRANCH = 'notarealbranch'
-const GH_RUN_ID = 'notarealrunid'
-*/
 const main = async () => {
   const webhookUrl = core.getInput('webhook')
-  const BLUESCAPE_URL = core.getInput('bluescape_url')
-  const RUN_STATUS = core.getInput('run_status')
-  const GH_RUN_ID = core.getInput('gh_run_id')
-  const TESTRAIL_PROJECT_ID = core.getInput('testrail_project_id') || undefined
-  let PACKAGE = core.getInput('package') || undefined
+  const bluescapeUrl = core.getInput('bluescape_url')
+  const runStatus = core.getInput('run_status') || undefined
+  const ghRunId = core.getInput('gh_run_id')
+  const testrailProjectId = core.getInput('testrail_project_id') || undefined
+  const ghPackage = core.getInput('package') || undefined
 
   const context = github.context
-  const GH_REPO_NAME = context.repo.repo
-  const BRANCH = context.payload.pull_request.head.ref
-  const GH_REPO_LINK = context.payload.repository.html_url
+  const ghRepoName = context.repo.repo
+  const ghBranch = context.payload.pull_request.head.ref
+  const ghRepoLink = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
-  if (PACKAGE === undefined) {
-    PACKAGE = 'Package was not defined!'
-  }
+  const testText = [':tada: *Github Test Run Complete!* :tada:']
+  testText.push(makeTestLine('Repository', ghRepoName))
+  testText.push(makeTestLine('Environment', bluescapeUrl))
+  testText.push(makeTestLine('Branch', ghBranch))
+  if (ghPackage) testText.push(makeTestLine('Package', ghPackage))
+  if (runStatus) testText.push(makeTestLine('Status', runStatus))
+
+  const blocks = []
+  blocks.push(makeLinkBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`))
+  blocks.push(makeLinkBlock('Bluescape Environment', `https://client.${bluescapeUrl}/my`))
+  blocks.push(makeLinkBlock('Repository', ghRepoLink))
+  if (testrailProjectId) blocks.push(makeLinkBlock('Testrail Project', testrailProjectId))
 
   const slackMessage = {
     blocks: [
@@ -36,65 +38,36 @@ const main = async () => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `:tada: *GitHub Test Run Complete!* :tada:\n\n Repository: \`${GH_REPO_NAME}\` \nPackage: \`${PACKAGE}\`\n Environment: \`${BLUESCAPE_URL}\`\nStatus: \`${RUN_STATUS}\`\nBranch: \`${BRANCH}\``
+          text: testText.join('\n')
         }
       },
       {
         type: 'actions',
-        elements: [
-          {
-            type: 'button',
-            style: 'primary',
-            text: {
-              type: 'plain_text',
-              text: 'GitHub Run',
-              emoji: true
-            },
-            value: 'click_me',
-            url: `${GH_REPO_LINK}/actions/runs/${GH_RUN_ID}`
-          },
-          {
-            type: 'button',
-            text: {
-              type: 'plain_text',
-              text: 'Bluescape Environment',
-              emoji: true
-            },
-            value: 'click_me',
-            url: `https://client.${BLUESCAPE_URL}/my`
-          },
-          {
-            type: 'button',
-            text: {
-              type: 'plain_text',
-              text: 'Repository',
-              emoji: true
-            },
-            value: 'click_me',
-            url: `${GH_REPO_LINK}`
-          }
-        ]
+        elements: blocks
       },
       {
         type: 'divider'
       }
     ]
   }
-
-  if (TESTRAIL_PROJECT_ID) {
-    slackMessage.blocks[2].elements.push({
-      type: 'button',
-      text: {
-        type: 'plain_text',
-        text: 'TestRail Project',
-        emoji: true
-      },
-      value: 'click_me',
-      url: `https://testrail.bluescape.com/index.php?/projects/overview/${TESTRAIL_PROJECT_ID}`
-    })
-  }
-
   await webhook.send(slackMessage)
 }
 
 main().catch((err) => core.setFailed(err.message))
+
+function makeTestLine (name, value) {
+  return `${name}: \`${value}\``
+}
+
+function makeLinkBlock (title, link) {
+  return {
+    type: 'button',
+    text: {
+      type: 'plain_text',
+      text: title,
+      emoji: true
+    },
+    value: 'click_me',
+    url: link
+  }
+}

@@ -25,3 +25,4 @@ jobs:
           bluescape_url: "abc"
           testrail_project_id: "15"
           package: "Some made up package"
+          
