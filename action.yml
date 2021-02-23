@@ -17,9 +17,6 @@ inputs:
   gh_run_id:
     description: "Github run ID"
     required: true
-  repo_token:
-    description: "Token for the repo that this is running in"
-    required: true
   testrail_project_id:
     description: "Testrail project id"
     required: false

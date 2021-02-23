@@ -10,9 +10,6 @@ const BRANCH = 'notarealbranch'
 const GH_RUN_ID = 'notarealrunid'
 */
 const main = async () => {
-  const token = core.getInput('repo_token')
-  const octokit = github.getOctokit(token)
-  console.log('Hello this is in the beginning of main')
   const webhookUrl = core.getInput('webhook')
   const BLUESCAPE_URL = core.getInput('bluescape_url')
   const RUN_STATUS = core.getInput('run_status')
@@ -26,8 +23,6 @@ const main = async () => {
   const GH_REPO_LINK = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
-  const GH_RUN = await octokit.request(`GET /repos/Bluescape/${GH_REPO_NAME}/actions/runs/${GH_RUN_ID}`)
-  console.log(JSON.stringify(GH_RUN))
   if (PACKAGE === undefined) {
     PACKAGE = 'Package was not defined!'
   }
@@ -99,14 +94,7 @@ const main = async () => {
     })
   }
 
-  console.log(`WebhookUrl: ${webhookUrl}`)
-  console.log(`BLUESCAP_URL: ${BLUESCAPE_URL}`)
-  console.log(`RUN_STATUS: ${RUN_STATUS}`)
-  console.log(`BRANCH: ${BRANCH}`)
-  console.log(`GH_RUN_ID: ${GH_RUN_ID}`)
-  console.log('Hello this is right beforet he webhook sends')
   await webhook.send(slackMessage)
-  console.log('Hello world')
 }
 
 main().catch((err) => core.setFailed(err.message))

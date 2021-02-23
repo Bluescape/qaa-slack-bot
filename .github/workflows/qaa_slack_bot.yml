@@ -24,4 +24,4 @@ jobs:
           run_status: "passed"
           bluescape_url: "abc"
           testrail_project_id: "15"
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          package: "Some made up package"
