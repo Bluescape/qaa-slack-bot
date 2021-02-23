@@ -10,20 +10,30 @@ const BRANCH = 'notarealbranch'
 const GH_RUN_ID = 'notarealrunid'
 */
 const main = async () => {
+  const token = core.getInput('repo_token')
+  const octokit = github.getOctokit(token)
   console.log('Hello this is in the beginning of main')
   const webhookUrl = core.getInput('webhook')
   const BLUESCAPE_URL = core.getInput('bluescape_url')
   const RUN_STATUS = core.getInput('run_status')
   const GH_RUN_ID = core.getInput('gh_run_id')
-  const GH_REPO_LINK = core.getInput('gh_repo_link')
   const TESTRAIL_PROJECT_ID = core.getInput('testrail_project_id') || undefined
   let PACKAGE = core.getInput('package') || undefined
 
   const context = github.context
   const GH_REPO_NAME = context.repo.repo
   const BRANCH = context.payload.pull_request.head.ref
-
+  const GH_REPO_LINK = context.payload.repository.html_url
+  const GH_SHA = context.payload.after
   const webhook = new IncomingWebhook(webhookUrl)
+
+
+
+  const status = await octokit.request(`GET /repos/Bluescape/${GH_REPO_NAME}/commits/${GH_SHA}/status`) 
+  console.log(JSON.stringify(status))
+  if (PACKAGE === undefined) {
+    PACKAGE = 'Package was not defined!'
+  }
 
   const slackMessage = {
     blocks: [
@@ -91,11 +101,6 @@ const main = async () => {
       url: `https://testrail.bluescape.com/index.php?/projects/overview/${TESTRAIL_PROJECT_ID}`
     })
   }
-
-  if (PACKAGE === undefined) {
-    PACKAGE = 'some test package'
-  }
-  console.log(PACKAGE);
 
   console.log(`WebhookUrl: ${webhookUrl}`)
   console.log(`BLUESCAP_URL: ${BLUESCAPE_URL}`)

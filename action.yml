@@ -1,31 +1,28 @@
 name: "Slack bot"
 description: "Posts results to slack"
 author: "Fiona Hu"
-branding: 
+branding:
   icon: "message-square"
   color: "blue"
-inputs: 
-  webhook: 
+inputs:
+  webhook:
     description: "Slack webhook"
     required: true
-  bluescape_url: 
+  bluescape_url:
     description: "Bluescape URL"
     required: true
-  run_status: 
+  run_status:
     description: "Run status"
     required: true
-  branch: 
-    description: "Branch"
-    required: true
-  gh_run_id: 
+  gh_run_id:
     description: "Github run ID"
     required: true
-  gh_repo_link: 
-    description: "Repository link"
+  repo_token:
+    description: "Token for the repo that this is running in"
     required: true
   testrail_project_id:
     description: "Testrail project id"
     required: false
-runs: 
+runs:
   using: "node12"
   main: "src/index.js"

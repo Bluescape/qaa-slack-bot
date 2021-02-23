@@ -23,5 +23,5 @@ jobs:
           gh_run_id: "some_run_id"
           run_status: "passed"
           bluescape_url: "abc"
-          gh_repo_link: "https://github.com/Bluescape/qaa-slack-bot/"
           testrail_project_id: "15"
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
