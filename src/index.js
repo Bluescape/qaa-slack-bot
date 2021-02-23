@@ -29,6 +29,8 @@ const main = async () => {
   blocks.push(makeLinkBlock('Repository', ghRepoLink))
   if (testrailProjectId) blocks.push(makeLinkBlock('Testrail Project', testrailProjectId))
 
+  console.log(testText)
+  console.log(blocks)
   const slackMessage = {
     blocks: [
       {
