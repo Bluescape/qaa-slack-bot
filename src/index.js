@@ -27,7 +27,7 @@ const main = async () => {
   blocks.push(makeLinkBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`))
   blocks.push(makeLinkBlock('Bluescape Environment', `https://client.${bluescapeUrl}/my`))
   blocks.push(makeLinkBlock('Repository', ghRepoLink))
-  if (testrailProjectId) blocks.push(makeLinkBlock('Testrail Project', testrailProjectId))
+  if (testrailProjectId) blocks.push(makeLinkBlock('Testrail Project', `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`))
 
   console.log(testText)
   console.log(blocks)
