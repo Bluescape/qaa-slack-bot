@@ -16,7 +16,7 @@ const main = async () => {
   const ghRepoLink = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
-  console.log('context.repo: ', JSON.stringify(context.repeo))
+  console.log('context.repo: ', JSON.stringify(context.repository))
 
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
