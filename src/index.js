@@ -59,7 +59,7 @@ const main = async () => {
               emoji: true
             },
             value: 'click_me',
-            url: `https://github.com/Bluescape/thoughtstream-browser_client/actions/runs/${GH_RUN_ID}`
+            url: `${GH_REPO_LINK}/actions/runs/${GH_RUN_ID}`
           },
           {
             type: 'button',
