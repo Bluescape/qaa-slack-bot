@@ -53,3 +53,6 @@ jobs:
           testrail_project_id: "15"
 ```
 This will send the `run_status`, `bluescape_url`, and `testrail_project_id` to the Slack channel via its webhook. 
+
+The output of this will look like so
+![Example image](example_output.png)
