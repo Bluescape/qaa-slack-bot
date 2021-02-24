@@ -30,6 +30,8 @@ const main = async () => {
   blocks.push(makeButtonBlock('Repository', ghRepoLink))
   if (testrailProjectId) blocks.push(makeButtonBlock('Testrail Project', `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`))
 
+  console.log(testText)
+  console.log(blocks)
   const slackMessage = {
     blocks: [
       {
