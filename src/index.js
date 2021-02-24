@@ -25,10 +25,10 @@ const main = async () => {
   if (runStatus) testText.push(makeTestLine('Status', runStatus))
 
   const blocks = []
-  blocks.push(makeLinkBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`))
-  blocks.push(makeLinkBlock('Bluescape Environment', `https://client.${bluescapeUrl}/my`))
-  blocks.push(makeLinkBlock('Repository', ghRepoLink))
-  if (testrailProjectId) blocks.push(makeLinkBlock('Testrail Project', `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`))
+  blocks.push(makeButtonBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`, 'primary'))
+  blocks.push(makeButtonBlock('Bluescape Environment', `https://client.${bluescapeUrl}/my`))
+  blocks.push(makeButtonBlock('Repository', ghRepoLink))
+  if (testrailProjectId) blocks.push(makeButtonBlock('Testrail Project', `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`))
 
   const slackMessage = {
     blocks: [
@@ -60,11 +60,11 @@ function makeTestLine (name, value) {
   return `${name}: \`${value}\``
 }
 
-function makeLinkBlock (title, link) {
+function makeButtonBlock (title, link, type = 'plain_text') {
   return {
     type: 'button',
     text: {
-      type: 'plain_text',
+      type: type,
       text: title,
       emoji: true
     },

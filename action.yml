@@ -10,10 +10,10 @@ inputs:
     required: true
   bluescape_url:
     description: "Bluescape URL"
-    required: true
+    required: false
   run_status:
     description: "Run status"
-    required: true
+    required: false
   package: 
     description: "Package name"
     required: false
