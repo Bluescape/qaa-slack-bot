@@ -19,14 +19,14 @@ const main = async () => {
 
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
-  testText.push(makeTestLine('Environment', bluescapeUrl))
+  if (bluescapeUrl) testText.push(makeTestLine('Environment', bluescapeUrl))
   testText.push(makeTestLine('Branch', ghBranch))
   if (ghPackage) testText.push(makeTestLine('Package', ghPackage))
   if (runStatus) testText.push(makeTestLine('Status', runStatus))
 
   const blocks = []
   blocks.push(makeButtonBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`, 'primary'))
-  blocks.push(makeButtonBlock('Bluescape Environment', `https://client.${bluescapeUrl}/my`))
+  if (bluescapeUrl) blocks.push(makeButtonBlock('Bluescape Environment', `https://client.${bluescapeUrl}/my`))
   blocks.push(makeButtonBlock('Repository', ghRepoLink))
   if (testrailProjectId) blocks.push(makeButtonBlock('Testrail Project', `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`))
 
