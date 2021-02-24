@@ -27,7 +27,6 @@ on: [pull_request, repository_dispatch]
 
 env: 
   node-version: 12.x
-  SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
 
 jobs: 
   post-to-slack:
@@ -47,7 +46,7 @@ jobs:
       - name: Run script 
         uses: ./
         with: 
-          webhook: ${{ env.SLACK_WEBHOOK_URL }}
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           run_status: "passed"
           bluescape_url: "stg1.bluescape.com"
           testrail_project_id: "15"
