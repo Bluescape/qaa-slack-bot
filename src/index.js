@@ -62,11 +62,12 @@ function makeTestLine (name, value) {
   return `${name}: \`${value}\``
 }
 
-function makeButtonBlock (title, link, type = 'plain_text') {
+function makeButtonBlock (title, link, style = undefined) {
   return {
     type: 'button',
+    style: style,
     text: {
-      type: type,
+      type: 'plain_text',
       text: title,
       emoji: true
     },
