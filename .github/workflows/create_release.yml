@@ -22,3 +22,4 @@ jobs:
         release_name: ${{ github.ref }}
         draft: false
         prerelease: false
+        
