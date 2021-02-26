@@ -24,7 +24,7 @@ const main = async () => {
   testText.push(makeTestLine('Branch', ghBranch))
   if (ghPackage) testText.push(makeTestLine('Package', ghPackage))
   if (runStatus) testText.push(makeTestLine('Status', runStatus))
-  if (extraMarkdownText) testText.push(extraMarkdownText)
+  if (extraMarkdownText) testText.push("\n--Extra text--\n" + extraMarkdownText + "\n---End of extra text--\n")
 
   const blocks = []
   blocks.push(makeButtonBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`, 'primary'))
