@@ -28,64 +28,60 @@ const main = async () => {
   //  if (extraMarkdownText) testText.push("\n--Extra text--\n" + extraMarkdownText + "\n--End of extra text--\n")
   //  if (extraMarkdownText) testText.push("\n")
 
-  const blocks = [];
-  blocks.push(
+  const links = [];
+  links.push(
     makeButtonBlock(
       "Github Run",
       `${ghRepoLink}/actions/runs/${ghRunId}`,
       "primary"
     )
   );
-  if (bluescapeUrl)
-    blocks.push(
+  if (bluescapeUrl) {
+    links.push(
       makeButtonBlock(
         "Bluescape Environment",
         `https://client.${bluescapeUrl}/my`
       )
     );
-  blocks.push(makeButtonBlock("Repository", ghRepoLink));
-  if (testrailProjectId)
-    blocks.push(
+  }
+  links.push(makeButtonBlock("Repository", ghRepoLink));
+  if (testrailProjectId) {
+    links.push(
       makeButtonBlock(
         "Testrail Project",
         `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`
       )
     );
+  }
 
-  const slackMessage = {
-    blocks: [
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: testText.join("\n"),
-        },
-      },
-      {
-        type: "divider",
-      },
-      {
-        type: "section",
-        text: {
-          type: "mrkdwn",
-          text: extraMarkdownText,
-        },
-      },
-      {
-        type: "divider",
-      },
-      {
-        type: "actions",
-        elements: blocks,
-      },
-      {
-        type: "divider",
-      },
-    ],
+  const divider = { type: "divider" };
+  let slackMessage = {
+    blocks: [],
   };
+  slackMessage.blocks.push(divider);
+  slackMessage.blocks.push({
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: testText.join("\n"),
+    },
+  });
+  if (extraMarkdownText) {
+    slackMessage.blocks.push(divider);
+    slackMessage.blocks.push({
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: extraMarkdownText,
+      },
+    });
+    slackMessage.blocks.push(divider);
+  }
+  slackMessage.blocks.push({
+    type: "actions",
+    elements: links,
+  });
+  slackMessage.blocks.push(divider);
   await webhook.send(slackMessage);
 };
 
