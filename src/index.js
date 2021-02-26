@@ -17,7 +17,7 @@ const main = async () => {
   const ghRepoLink = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
-  console.log("branch: ", ghBranch, typof(ghBranch))
+  console.log('branch: ', ghBranch, typeof ghBranch)
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
   if (bluescapeUrl) testText.push(makeTestLine('Environment', bluescapeUrl))
