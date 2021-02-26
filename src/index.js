@@ -1,78 +1,110 @@
-const core = require('@actions/core')
-const github = require('@actions/github')
-const _ = require('lodash')
-const { IncomingWebhook } = require('@slack/webhook')
+const core = require("@actions/core");
+const github = require("@actions/github");
+const _ = require("lodash");
+const { IncomingWebhook } = require("@slack/webhook");
 
 const main = async () => {
-  const webhookUrl = core.getInput('webhook')
-  const bluescapeUrl = core.getInput('bluescape_url')
-  const runStatus = core.getInput('run_status') || undefined
-  const testrailProjectId = core.getInput('testrail_project_id') || undefined
-  const ghPackage = core.getInput('package') || undefined
-  const extraMarkdownText = core.getInput('extra_text') || undefined
+  const webhookUrl = core.getInput("webhook");
+  const bluescapeUrl = core.getInput("bluescape_url");
+  const runStatus = core.getInput("run_status") || undefined;
+  const testrailProjectId = core.getInput("testrail_project_id") || undefined;
+  const ghPackage = core.getInput("package") || undefined;
+  const extraMarkdownText = core.getInput("extra_text") || undefined;
 
-  const context = github.context
-  const ghRunId = context.runId
-  const ghRepoName = context.repo.repo
-  const ghBranch = _.get(context, ['event', 'branch']) || _.get(context, ['ref'])
-  const ghRepoLink = context.payload.repository.html_url
-  const webhook = new IncomingWebhook(webhookUrl)
+  const context = github.context;
+  const ghRunId = context.runId;
+  const ghRepoName = context.repo.repo;
+  const ghBranch =
+    _.get(context, ["event", "branch"]) || _.get(context, ["ref"]);
+  const ghRepoLink = context.payload.repository.html_url;
+  const webhook = new IncomingWebhook(webhookUrl);
 
-  const testText = [':tada: *Github Test Run Complete!* :tada:']
-  testText.push(makeTestLine('Repository', ghRepoName))
-  if (bluescapeUrl) testText.push(makeTestLine('Environment', bluescapeUrl))
-  testText.push(makeTestLine('Branch', ghBranch))
-  if (ghPackage) testText.push(makeTestLine('Package', ghPackage))
-  if (runStatus) testText.push(makeTestLine('Status', runStatus))
-  if (extraMarkdownText) testText.push("\n--Extra text--\n" + extraMarkdownText + "\n--End of extra text--\n")
-  if (extraMarkdownText) testText.push("\n")
+  const testText = [":tada: *Github Test Run Complete!* :tada:"];
+  testText.push(makeTestLine("Repository", ghRepoName));
+  if (bluescapeUrl) testText.push(makeTestLine("Environment", bluescapeUrl));
+  testText.push(makeTestLine("Branch", ghBranch));
+  if (ghPackage) testText.push(makeTestLine("Package", ghPackage));
+  if (runStatus) testText.push(makeTestLine("Status", runStatus));
+  //  if (extraMarkdownText) testText.push("\n--Extra text--\n" + extraMarkdownText + "\n--End of extra text--\n")
+  //  if (extraMarkdownText) testText.push("\n")
 
-  const blocks = []
-  blocks.push(makeButtonBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`, 'primary'))
-  if (bluescapeUrl) blocks.push(makeButtonBlock('Bluescape Environment', `https://client.${bluescapeUrl}/my`))
-  blocks.push(makeButtonBlock('Repository', ghRepoLink))
-  if (testrailProjectId) blocks.push(makeButtonBlock('Testrail Project', `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`))
+  const blocks = [];
+  blocks.push(
+    makeButtonBlock(
+      "Github Run",
+      `${ghRepoLink}/actions/runs/${ghRunId}`,
+      "primary"
+    )
+  );
+  if (bluescapeUrl)
+    blocks.push(
+      makeButtonBlock(
+        "Bluescape Environment",
+        `https://client.${bluescapeUrl}/my`
+      )
+    );
+  blocks.push(makeButtonBlock("Repository", ghRepoLink));
+  if (testrailProjectId)
+    blocks.push(
+      makeButtonBlock(
+        "Testrail Project",
+        `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`
+      )
+    );
 
   const slackMessage = {
     blocks: [
       {
-        type: 'divider'
+        type: "divider",
       },
       {
-        type: 'section',
+        type: "section",
         text: {
-          type: 'mrkdwn',
-          text: testText.join('\n')
-        }
+          type: "mrkdwn",
+          text: testText.join("\n"),
+        },
       },
       {
-        type: 'actions',
-        elements: blocks
+        type: "divider",
       },
       {
-        type: 'divider'
-      }
-    ]
-  }
-  await webhook.send(slackMessage)
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: extraMarkdownText,
+        },
+      },
+      {
+        type: "divider",
+      },
+      {
+        type: "actions",
+        elements: blocks,
+      },
+      {
+        type: "divider",
+      },
+    ],
+  };
+  await webhook.send(slackMessage);
+};
+
+main().catch((err) => core.setFailed(err.message));
+
+function makeTestLine(name, value) {
+  return `${name}: \`${value}\``;
 }
 
-main().catch((err) => core.setFailed(err.message))
-
-function makeTestLine (name, value) {
-  return `${name}: \`${value}\``
-}
-
-function makeButtonBlock (title, link, style = undefined) {
+function makeButtonBlock(title, link, style = undefined) {
   return {
-    type: 'button',
+    type: "button",
     style: style,
     text: {
-      type: 'plain_text',
+      type: "plain_text",
       text: title,
-      emoji: true
+      emoji: true,
     },
-    value: 'click_me',
-    url: link
-  }
+    value: "click_me",
+    url: link,
+  };
 }
