@@ -13,7 +13,7 @@ const main = async () => {
   const context = github.context
   const ghRunId = context.runId
   const ghRepoName = context.repo.repo
-  const ghBranch = _.get(context, ['head_ref']) || _.get(context, ['payload', 'pull_request', 'head', 'ref'])
+  const ghBranch = _.get(context, ['event', 'branch']) || _.get(context, ['ref'])
   const ghRepoLink = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
