@@ -9,6 +9,7 @@ const main = async () => {
   const runStatus = core.getInput('run_status') || undefined
   const testrailProjectId = core.getInput('testrail_project_id') || undefined
   const ghPackage = core.getInput('package') || undefined
+  const extraMarkdownText = core.getInput('extra_text') || undefined
 
   const context = github.context
   const ghRunId = context.runId
@@ -23,6 +24,7 @@ const main = async () => {
   testText.push(makeTestLine('Branch', ghBranch))
   if (ghPackage) testText.push(makeTestLine('Package', ghPackage))
   if (runStatus) testText.push(makeTestLine('Status', runStatus))
+  if (extraMarkdownText) testText.push(extraMarkdownText);
 
   const blocks = []
   blocks.push(makeButtonBlock('Github Run', `${ghRepoLink}/actions/runs/${ghRunId}`, 'primary'))
