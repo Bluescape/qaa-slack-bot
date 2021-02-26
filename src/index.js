@@ -13,11 +13,11 @@ const main = async () => {
   const context = github.context
   const ghRunId = context.runId
   const ghRepoName = context.repo.repo
-  const ghBranch = _.get(context, ['ref']) || _.get(context, ['payload', 'pull_request', 'head', 'ref'])
+  const ghBranch = _.get(context, ['payload', 'pull_request', 'head', 'ref']) || _.get(context, ['ref'])
   const ghRepoLink = context.payload.repository.html_url
   const webhook = new IncomingWebhook(webhookUrl)
 
-  console.log('branch, ', ghBranch)
+  console.log("branch: ", ghBranch, typof(ghBranch))
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
   if (bluescapeUrl) testText.push(makeTestLine('Environment', bluescapeUrl))
