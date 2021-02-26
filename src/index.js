@@ -25,8 +25,6 @@ const main = async () => {
   testText.push(makeTestLine('Branch', ghBranch))
   if (ghPackage) testText.push(makeTestLine('Package', ghPackage))
   if (runStatus) testText.push(makeTestLine('Status', runStatus))
-  //  if (extraMarkdownText) testText.push("\n--Extra text--\n" + extraMarkdownText + "\n--End of extra text--\n")
-  //  if (extraMarkdownText) testText.push("\n")
 
   const links = []
   links.push(
