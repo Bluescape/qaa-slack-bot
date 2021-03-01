@@ -28,7 +28,7 @@ On every pull request created against repo dispatch, report results to Slack
     if: always() && github.event_name == 'repository_dispatch'
     steps: 
       - name: Send result to slack 
-        uses: Bluescape/qaa-slack-bot@v0.0.2
+        uses: Bluescape/qaa-slack-bot@v0.0.5
         with: 
           webhook: ${{ secrets.SLACK_WEBHOOK }}
           run_status: ${{ needs.repo_dispatch.result }}
