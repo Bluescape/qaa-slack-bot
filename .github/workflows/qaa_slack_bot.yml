@@ -26,4 +26,5 @@ jobs:
           testrail_project_id: "15"
           testrail_run_id: 2105
           grafana_link: ${{ secrets.GRAFANA_LINK }}
+          test_start_time: 1614714663749
           extra_text: "*Done Issues Tagged Against Tests:*\nlinkone\nlinktwo"
