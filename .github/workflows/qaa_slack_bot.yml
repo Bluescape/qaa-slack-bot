@@ -7,8 +7,6 @@ env:
 jobs: 
   post-to-slack:
     runs-on: ubuntu-latest
-    outputs: 
-      tags: ${{steps.testing.outputs.text}}
     steps: 
       - name: Dump Github context
         env: 
@@ -19,11 +17,6 @@ jobs:
         uses: actions/setup-node@v1
         with: 
           node-version: '12.x'
-      - name: Testing variable
-        id: testing 
-        run: |
-          AUDIT=$(node ./src/test.js)
-          echo "::set-output name=text::$AUDIT"
       - name: Run script 
         uses: ./
         with: 
@@ -31,4 +24,4 @@ jobs:
           run_status: "passed"
           bluescape_url: "stg1.bluescape.com"
           testrail_project_id: "15"
-          extra_text:  ${{ steps.testing.outputs.text }}
+          extra_text: hello\\nthis\\nis\\*a test*\\n and an example
