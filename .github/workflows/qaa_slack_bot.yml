@@ -24,4 +24,5 @@ jobs:
           run_status: "passed"
           bluescape_url: "stg1.bluescape.com"
           testrail_project_id: "15"
-          extra_text: "hello\\nthis\\nis\\*a test*\\n and an example"
+          extra_text: "*Done Issues Tagged Against Tests:*\nlinkone\nlinktwo"
+          
