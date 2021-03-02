@@ -62,7 +62,8 @@ const main = async () => {
           parameters.grafanaLink,
           parameters.testStartTime,
           parameters.testEndTime,
-          parameters.bluescapeUrl
+          parameters.bluescapeUrl,
+          parameters.grafanaProduct
         )
       )
     )
@@ -114,6 +115,7 @@ function getGithubParameters () {
   output.grafanaLink = core.getInput('grafana_link') || undefined
   output.testStartTime = core.getInput('test_start_time') || undefined
   output.testEndTime = core.getInput('test_end_time') || undefined
+  output.grafanaProduct = core.getInput('grafan_product') || undefined
   return output
 }
 

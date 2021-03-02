@@ -35,6 +35,10 @@ inputs:
   test_end_time:
     description: "End time for Grafana"
     required: false
+  grafana_product: 
+    description: "Product for Grafana"
+    required: false 
+
 runs:
   using: "node12"
   main: "src/index.js"
