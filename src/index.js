@@ -105,7 +105,7 @@ const main = async () => {
     elements: links
   })
   slackMessage.blocks.push(divider)
-  console.log(slackMessage)
+  console.log(JSON.stringify(slackMessage))
   await webhook.send(slackMessage)
 }
 
