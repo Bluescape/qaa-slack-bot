@@ -25,3 +25,4 @@ jobs:
           bluescape_url: "stg1.bluescape.com"
           testrail_project_id: "15"
           testrail_run_id: 2105
+          grafana_link: ${{ secrets.GRAFANA_LINK }}

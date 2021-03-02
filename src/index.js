@@ -5,12 +5,15 @@ const { IncomingWebhook } = require('@slack/webhook')
 
 const main = async () => {
   const webhookUrl = core.getInput('webhook')
-  const bluescapeUrl = core.getInput('bluescape_url')
+  const bluescapeUrl = core.getInput('bluescape_url') || undefined
   const runStatus = core.getInput('run_status') || undefined
   const testrailProjectId = core.getInput('testrail_project_id') || undefined
   const ghPackage = core.getInput('package') || undefined
   const extraMarkdownText = core.getInput('extra_text') || undefined
   const testrailRunId = core.getInput('testrail_run_id') || undefined
+  const grafanaLink = core.getInput('grafana_link') || undefined
+  const testStartTime = core.getInput('test_start_time') || undefined
+  const testEndTime = core.getInput('test_end_time') || undefined
 
   const context = github.context
   const ghRunId = context.runId
@@ -59,6 +62,15 @@ const main = async () => {
         `https://testrail.bluescape.com/index.php?/runs/view/${testrailRunId}`
       )
     )
+  }
+  if (grafanaLink) {
+    if (testStartTime && testEndTime) {
+      links.push(makeButtonBlock('Grafana', `${grafanaLink}?orgId=1&from=${testStartTime}&to=${testStartTime}`))
+    } else if (testStartTime) {
+      links.push(makeButtonBlock('Grafana', `${grafanaLink}?orgId=1&from=${testStartTime}`))
+    } else {
+      links.push(makeButtonBlock('Grafana', grafanaLink))
+    }
   }
 
   const divider = { type: 'divider' }
