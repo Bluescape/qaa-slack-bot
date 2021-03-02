@@ -23,6 +23,9 @@ inputs:
   extra_text: 
     description: "Extra markdown text"
     required: false
+  testrail_run_id:
+    description: "Testrail run id"
+    required: false
 runs:
   using: "node12"
   main: "src/index.js"

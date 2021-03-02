@@ -10,6 +10,7 @@ const main = async () => {
   const testrailProjectId = core.getInput('testrail_project_id') || undefined
   const ghPackage = core.getInput('package') || undefined
   const extraMarkdownText = core.getInput('extra_text') || undefined
+  const testrailRunId = core.getInput('testrail_run_id') || undefined
 
   const context = github.context
   const ghRunId = context.runId
@@ -48,6 +49,14 @@ const main = async () => {
       makeButtonBlock(
         'Testrail Project',
         `https://testrail.bluescape.com/index.php?/projects/overview/${testrailProjectId}`
+      )
+    )
+  }
+  if (testrailRunId) {
+    links.push(
+      makeButtonBlock(
+        'Testrail Run',
+        `https://testrail.bluescape.com/index.php?/runs/view/${testrailRunId}`
       )
     )
   }
