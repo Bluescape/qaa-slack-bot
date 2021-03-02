@@ -139,9 +139,9 @@ function makeButtonBlock (title, link, style = undefined) {
 
 function grafanaLinkBuilder (base, startTime, endTime, environment, product) {
   const grafanaUrl = new URL(base)
-  grafanaUrl.searchParams.append('from', startTime)
-  grafanaUrl.searchParams.append('to', endTime)
-  grafanaUrl.searchParams.append('var-Environment', environment)
-  grafanaUrl.searchParams.append('var-Product', product)
+  if (startTime) grafanaUrl.searchParams.append('from', startTime)
+  if (endTime) grafanaUrl.searchParams.append('to', endTime)
+  if (environment) grafanaUrl.searchParams.append('var-Environment', environment)
+  if (product) grafanaUrl.searchParams.append('var-Product', product)
   return grafanaUrl
 }
