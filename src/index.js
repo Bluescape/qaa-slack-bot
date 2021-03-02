@@ -64,13 +64,17 @@ const main = async () => {
     )
   }
   if (grafanaLink) {
-    if (testStartTime && testEndTime) {
-      links.push(makeButtonBlock('Grafana', `${grafanaLink}?orgId=1&from=${testStartTime}&to=${testStartTime}`))
-    } else if (testStartTime) {
-      links.push(makeButtonBlock('Grafana', `${grafanaLink}?orgId=1&from=${testStartTime}`))
-    } else {
-      links.push(makeButtonBlock('Grafana', grafanaLink))
-    }
+    links.push(
+      makeButtonBlock(
+        'Grafana',
+        grafanaLinkBuilder(
+          grafanaLink,
+          testStartTime,
+          testEndTime,
+          bluescapeUrl
+        )
+      )
+    )
   }
 
   const divider = { type: 'divider' }
@@ -122,4 +126,11 @@ function makeButtonBlock (title, link, style = undefined) {
     value: 'click_me',
     url: link
   }
+}
+
+function grafanaLinkBuilder (base, startTime, endTime, environment) {
+  const grafanaUrl = new URL(base)
+  grafanaUrl.searchParams.append('from', startTime)
+  grafanaUrl.searchParams.append('to', endTime)
+  grafanaUrl.searchParams.append('var-Environment', environment)
 }
