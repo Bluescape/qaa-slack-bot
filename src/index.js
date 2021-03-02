@@ -70,7 +70,7 @@ const main = async () => {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: '$INPUT_EXTRA_TEXT'
+        text: `${extraMarkdownText}`
       }
     })
     slackMessage.blocks.push(divider)
