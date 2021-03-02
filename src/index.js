@@ -70,7 +70,7 @@ const main = async () => {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: extraMarkdownText.replaceAll('\\n', '\n')
+        text: extraMarkdownText.replace(/\\n/g, '\n')
       }
     })
     slackMessage.blocks.push(divider)
