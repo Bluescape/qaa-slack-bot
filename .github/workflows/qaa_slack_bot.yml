@@ -24,5 +24,10 @@ jobs:
           run_status: "passed"
           bluescape_url: "stg1.bluescape.com"
           testrail_project_id: "15"
+<<<<<<< HEAD
           testrail_run_id: 2105
           grafana_link: ${{ secrets.GRAFANA_LINK }}
+=======
+          extra_text: "*Done Issues Tagged Against Tests:*\nlinkone\nlinktwo"
+          
+>>>>>>> develop
