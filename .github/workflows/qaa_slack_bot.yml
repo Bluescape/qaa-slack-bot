@@ -24,3 +24,4 @@ jobs:
           run_status: "passed"
           bluescape_url: "stg1.bluescape.com"
           testrail_project_id: "15"
+          extra_text: "*Done Issues Tagged Against Tests:* \nhttps://jira.common.bluescape.com/browse/WEBC-9057"
