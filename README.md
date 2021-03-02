@@ -20,20 +20,14 @@ The rest of these inputs are optional
 - `testrail_project_id`: The project ID of your TestRail project
 
 ## Example Workflow
-On every pull request created against repo dispatch, report results to Slack
 ```yaml
-  send_slack_notification:
-    needs: [setup, repo_dispatch]
-    runs-on: ubuntu-18.04
-    if: always() && github.event_name == 'repository_dispatch'
-    steps: 
-      - name: Send result to slack 
-        uses: Bluescape/qaa-slack-bot@v0.0.5
-        with: 
-          webhook: ${{ secrets.SLACK_WEBHOOK }}
-          run_status: ${{ needs.repo_dispatch.result }}
-          bluescape_url: ${{ fromJson(needs.setup.outputs.environment)[0] }}
-          package: qa-perf-collab 
+  - name: Send result to slack 
+    uses: Bluescape/qaa-slack-bot@v0.0.5
+    with: 
+      webhook: ${{ secrets.SLACK_WEBHOOK }}
+      run_status: ${{ needs.repo_dispatch.result }}
+      bluescape_url: ${{ fromJson(needs.setup.outputs.environment)[0] }}
+      package: qa-perf-collab 
 ```
 This will send the `run_status`, `bluescape_url`, and `testrail_project_id` to the Slack channel via its webhook. 
 
