@@ -134,4 +134,5 @@ function grafanaLinkBuilder (base, startTime, endTime, environment) {
   grafanaUrl.searchParams.append('from', startTime)
   grafanaUrl.searchParams.append('to', endTime)
   grafanaUrl.searchParams.append('var-Environment', environment)
+  return grafanaUrl
 }
