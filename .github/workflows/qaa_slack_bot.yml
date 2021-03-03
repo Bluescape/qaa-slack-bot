@@ -29,4 +29,5 @@ jobs:
           test_start_time: 1614714664148
           test_end_time: 1614717691841
           grafana_product: "browser_client"
+          grafana_feature: "Strokes @Feature:Strokes"
           extra_text: "*Done Issues Tagged Against Tests:*\nlinkone\nlinktwo"

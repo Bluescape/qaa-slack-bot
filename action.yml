@@ -38,7 +38,7 @@ inputs:
   grafana_product: 
     description: "Product for Grafana"
     required: false 
-  feature: 
+  grafana_feature: 
     description: "Feature for Grafana"
     required: false
 
