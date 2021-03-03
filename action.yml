@@ -38,6 +38,9 @@ inputs:
   grafana_product: 
     description: "Product for Grafana"
     required: false 
+  feature: 
+    description: "Feature for Grafana"
+    required: false
 
 runs:
   using: "node12"

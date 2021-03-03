@@ -63,7 +63,8 @@ const main = async () => {
           parameters.testStartTime,
           parameters.testEndTime,
           parameters.bluescapeUrl,
-          parameters.grafanaProduct
+          parameters.grafanaProduct,
+          parameters.grafanaFeature
         )
       )
     )
@@ -115,7 +116,8 @@ function getGithubParameters () {
   output.grafanaLink = core.getInput('grafana_link') || undefined
   output.testStartTime = core.getInput('test_start_time') || undefined
   output.testEndTime = core.getInput('test_end_time') || undefined
-  output.grafanaProduct = core.getInput('grafan_product') || undefined
+  output.grafanaProduct = core.getInput('grafana_product') || undefined
+  output.grafanaFeature = core.getInput('grafana_feature') || undefined
   return output
 }
 
@@ -137,11 +139,12 @@ function makeButtonBlock (title, link, style = undefined) {
   }
 }
 
-function grafanaLinkBuilder (base, startTime, endTime, environment, product) {
+function grafanaLinkBuilder (base, startTime, endTime, environment, product, feature) {
   const grafanaUrl = new URL(base)
   if (startTime) grafanaUrl.searchParams.append('from', startTime)
   if (endTime) grafanaUrl.searchParams.append('to', endTime)
   if (environment) grafanaUrl.searchParams.append('var-Environment', environment)
   if (product) grafanaUrl.searchParams.append('var-Product', product)
+  if (feature) grafanaUrl.searchParams.append('var-Feature', feature)
   return grafanaUrl
 }
