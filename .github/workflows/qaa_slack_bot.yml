@@ -30,4 +30,5 @@ jobs:
           test_end_time: 1614717691841
           grafana_product: "browser_client"
           grafana_feature: "Strokes @Feature:Strokes"
+          grafana_process: "chrome"
           extra_text: "*Done Issues Tagged Against Tests:*\nlinkone\nlinktwo"

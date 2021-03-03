@@ -41,6 +41,9 @@ inputs:
   grafana_feature: 
     description: "Feature for Grafana"
     required: false
+  grafana_process: 
+    description: "Process for Grafana"
+    required: false
 
 runs:
   using: "node12"
