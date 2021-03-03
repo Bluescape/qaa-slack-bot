@@ -23,6 +23,28 @@ inputs:
   extra_text: 
     description: "Extra markdown text"
     required: false
+  testrail_run_id:
+    description: "Testrail run id"
+    required: false
+  grafana_link:
+    description: "Grafana link"
+    required: false 
+  test_start_time:
+    description: "Start time for Grafana"
+    required: false
+  test_end_time:
+    description: "End time for Grafana"
+    required: false
+  grafana_product: 
+    description: "Product for Grafana"
+    required: false 
+  grafana_feature: 
+    description: "Feature for Grafana"
+    required: false
+  grafana_process: 
+    description: "Process for Grafana"
+    required: false
+
 runs:
   using: "node12"
   main: "src/index.js"
