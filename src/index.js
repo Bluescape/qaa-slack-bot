@@ -11,7 +11,8 @@ const main = async () => {
   const ghRepoName = context.repo.repo
   const ghBranch =
     _.get(context, ['event', 'branch']) || _.get(context, ['ref'])
-  const ghRepoLink = context.payload.repository.html_url
+  const ghRepoLink =
+    _.get(context, ['payload', 'repository', 'html_url']) || _.get(context, ['event', 'repository', 'html_url'])
   const webhook = new IncomingWebhook(parameters.webhookUrl)
 
   const testText = [':tada: *Github Test Run Complete!* :tada:']
@@ -37,7 +38,7 @@ const main = async () => {
       )
     )
   }
-  links.push(makeButtonBlock('Repository', ghRepoLink))
+  if (ghRepoLink) links.push(makeButtonBlock('Repository', ghRepoLink))
   if (parameters.testrailProjectId) {
     links.push(
       makeButtonBlock(
