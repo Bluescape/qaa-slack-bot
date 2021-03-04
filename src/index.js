@@ -11,7 +11,10 @@ const main = async () => {
   const ghRepoName = context.repo.repo
   const ghBranch =
     _.get(context, ['event', 'branch']) || _.get(context, ['ref'])
-  const ghRepoLink = context.event.repository.html_url || context.payload.repository.html_url 
+  console.log("Context: ", context)
+  console.log("Context keys", Object.keys(context))
+  console.log("Event keys", Object.keys(context))
+  const ghRepoLink = context.event.repository.html_url || context.payload.repository.html_url
   const webhook = new IncomingWebhook(parameters.webhookUrl)
 
   const testText = [':tada: *Github Test Run Complete!* :tada:']
