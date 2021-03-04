@@ -71,6 +71,10 @@ const main = async () => {
       )
     )
   }
+  links.push(makeButtonBlock(
+    'Testing an undefined link',
+    _.get(context, 'abc')
+  ))
 
   const divider = { type: 'divider' }
   const slackMessage = {
