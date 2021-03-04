@@ -38,7 +38,7 @@ const main = async () => {
       )
     )
   }
-  links.push(makeButtonBlock('Repository', ghRepoLink))
+  if (ghRepoLink) links.push(makeButtonBlock('Repository', ghRepoLink))
   if (parameters.testrailProjectId) {
     links.push(
       makeButtonBlock(
@@ -71,10 +71,6 @@ const main = async () => {
       )
     )
   }
-  links.push(makeButtonBlock(
-    'Testing an undefined link',
-    _.get(context, 'abc')
-  ))
 
   const divider = { type: 'divider' }
   const slackMessage = {
