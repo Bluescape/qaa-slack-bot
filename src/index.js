@@ -12,7 +12,7 @@ const main = async () => {
   const ghBranch =
     _.get(context, ['event', 'branch']) || _.get(context, ['ref'])
   const ghRepoLink =
-    _.get(context, ['payload', 'repository', 'html_url']) || _.get(context, 'event', 'repository', 'html_url')
+    _.get(context, ['payload', 'repository', 'html_url']) || _.get(context, ['event', 'repository', 'html_url'])
   const webhook = new IncomingWebhook(parameters.webhookUrl)
 
   const testText = [':tada: *Github Test Run Complete!* :tada:']
