@@ -22,7 +22,7 @@ The rest of these inputs are optional
 ## Example Workflow
 ```yaml
   - name: Send result to slack 
-    uses: Bluescape/qaa-slack-bot@v0.0.5
+    uses: Bluescape/qaa-slack-bot@v0.0.8
     with: 
       webhook: ${{ secrets.SLACK_WEBHOOK }}
       run_status: ${{ needs.repo_dispatch.result }}
