@@ -19,6 +19,7 @@ const main = async () => {
     */
   const webhook = new IncomingWebhook(parameters.webhookUrl)
   console.log(`${_.get(context, ['server_url'])}/${_.get(context, ['repository'])}`)
+  console.log("Context: ", context)
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
   if (parameters.bluescapeUrl) { testText.push(makeTestLine('Environment', parameters.bluescapeUrl)) }
