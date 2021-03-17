@@ -5,8 +5,8 @@ const { IncomingWebhook } = require('@slack/webhook')
 
 const main = async () => {
   const parameters = getGithubParameters()
-
   const context = github.context
+  console.log('Context: ', context)
   const ghRunId = context.runId
   const ghRepoName = context.repo.repo
   const ghBranch =
@@ -16,13 +16,18 @@ const main = async () => {
     _.get(context, ['event', 'repository', 'html_url']) ||
     `${_.get(context, ['server_url'])}/${_.get(context, ['repository'])}`
   const webhook = new IncomingWebhook(parameters.webhookUrl)
-
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
-  if (parameters.bluescapeUrl) { testText.push(makeTestLine('Environment', parameters.bluescapeUrl)) }
+  if (parameters.bluescapeUrl) {
+    testText.push(makeTestLine('Environment', parameters.bluescapeUrl))
+  }
   testText.push(makeTestLine('Branch', ghBranch))
-  if (parameters.ghPackage) { testText.push(makeTestLine('Package', parameters.ghPackage)) }
-  if (parameters.runStatus) { testText.push(makeTestLine('Status', parameters.runStatus)) }
+  if (parameters.ghPackage) {
+    testText.push(makeTestLine('Package', parameters.ghPackage))
+  }
+  if (parameters.runStatus) {
+    testText.push(makeTestLine('Status', parameters.runStatus))
+  }
 
   const links = []
   links.push(
@@ -156,7 +161,9 @@ function grafanaLinkBuilder (
   const grafanaUrl = new URL(base)
   if (startTime) grafanaUrl.searchParams.append('from', startTime)
   if (endTime) grafanaUrl.searchParams.append('to', endTime)
-  if (environment) { grafanaUrl.searchParams.append('var-Environment', environment) }
+  if (environment) {
+    grafanaUrl.searchParams.append('var-Environment', environment)
+  }
   if (product) grafanaUrl.searchParams.append('var-Product', product)
   if (feature) grafanaUrl.searchParams.append('var-Feature', feature)
   if (process) grafanaUrl.searchParams.append('var-Process', process)
