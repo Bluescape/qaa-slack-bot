@@ -13,11 +13,12 @@ The only mandatory input is
 
 
 The rest of these inputs are optional 
-- `gh_run_id`: The run_id of your Github run, can be obtained using `${{ github.run_id}}`. 
 - `run_status`: The status of your github runn; if using repo_dispatch, can be obtained with `${{repo_dispatch.result}}`
 - `bluescape_url`: The url of the environment that you're testing against. Make sure that it includes the TLD or else Slack will complain and it will fail! (i.e, `stg1.bluescape.com`)
 - `package`: The package that your test runs are testing on 
 - `testrail_project_id`: The project ID of your TestRail project
+
+Note that `gh_run_id` is now obtained autotmatically from the Github context, so don't pass it in! 
 
 ## Example Workflow
 ```yaml
