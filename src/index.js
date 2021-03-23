@@ -11,11 +11,7 @@ const main = async () => {
   const ghRepoName = context.repo.repo
   const ghBranch =
     _.get(context, ['event', 'branch']) || _.get(context, ['ref'])
-  const ghRepoLink =
-    `${_.get(parameters, ['server_url'])}/${_.get(parameters, ['repository'])}` ||
-    _.get(context, ['payload', 'repository', 'html_url']) ||
-    _.get(context, ['event', 'repository', 'html_url']) ||
-    `${_.get(context, ['server_url'])}/${_.get(context, ['repository'])}`
+  const ghRepoLink = getGhRepoLink(parameters, context)
   const webhook = new IncomingWebhook(parameters.webhookUrl)
   const testText = [':tada: *Github Test Run Complete!* :tada:']
   testText.push(makeTestLine('Repository', ghRepoName))
@@ -172,4 +168,16 @@ function grafanaLinkBuilder (
   if (feature) grafanaUrl.searchParams.append('var-Feature', feature)
   if (process) grafanaUrl.searchParams.append('var-Process', process)
   return grafanaUrl
+}
+
+function getGhRepoLink (parameters, context) {
+  let output
+  if (parameters.server_url && parameters.repository) {
+    output = `${parameters.server_url}/${parameters.repository}`
+  } else {
+    output = _.get(context, ['payload', 'repository', 'html_url']) ||
+             _.get(context, ['event', 'repository', 'html_url']) ||
+            `${_.get(context, ['server_url'])}/${_.get(context, ['repository'])}`
+  }
+  return output
 }
