@@ -6,12 +6,13 @@ const { IncomingWebhook } = require('@slack/webhook')
 const main = async () => {
   const parameters = getGithubParameters()
   const context = github.context
-  console.log('Context: ', context)
+  if (parameters.debug) { console.log('Context: ', context) }
   const ghRunId = context.runId
   const ghRepoName = context.repo.repo
   const ghBranch =
     _.get(context, ['event', 'branch']) || _.get(context, ['ref'])
   const ghRepoLink =
+    `${_.get(parameters, ['server_url'])}/${_.get(parameters, ['repository'])}` ||
     _.get(context, ['payload', 'repository', 'html_url']) ||
     _.get(context, ['event', 'repository', 'html_url']) ||
     `${_.get(context, ['server_url'])}/${_.get(context, ['repository'])}`
@@ -128,6 +129,9 @@ function getGithubParameters () {
   output.grafanaProduct = core.getInput('grafana_product') || undefined
   output.grafanaFeature = core.getInput('grafana_feature') || undefined
   output.grafanaProcess = core.getInput('grafana_process') || undefined
+  output.server_url = core.getInput('server_url') || undefined
+  output.repository = core.getInput('repository') || undefined
+  output.debug = core.getInput('debug') || undefined
   return output
 }
 

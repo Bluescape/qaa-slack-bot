@@ -32,3 +32,5 @@ jobs:
           grafana_feature: "Strokes @Feature:Strokes"
           grafana_process: "chrome"
           extra_text: "*Done Issues Tagged Against Tests:*\nlinkone\nlinktwo"
+          server_url: ${{ GITHUB_CONTEXT.server_url }}
+          repository: ${{ GITHUB_CONTEXT.repository }}
