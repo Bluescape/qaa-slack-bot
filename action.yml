@@ -44,7 +44,15 @@ inputs:
   grafana_process: 
     description: "Process for Grafana"
     required: false
-
+  server_url:
+    description: "Server URL"
+    required: false
+  repository:
+    description: "Repository"
+    required: false
+  debug: 
+    description: "Debug"
+    required: false
 runs:
   using: "node12"
   main: "src/index.js"

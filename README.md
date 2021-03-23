@@ -18,8 +18,15 @@ The rest of these inputs are optional
 - `package`: The package that your test runs are testing on 
 - `testrail_project_id`: The project ID of your TestRail project
 
+If you're running a cronjob, due to minimal context given during one, you will have to add these two lines to your workflow: 
+```
+server_url: ${{ env.GITHUB_CONTEXT.server_url }}
+repository: ${{ env.GITHUB_CONTEXT.repository }}
+```
+
 Note that `gh_run_id` is now obtained autotmatically from the Github context, so don't pass it in! 
 
+There is also a debug option: Add `debug: "true"` to your workflow step and the slack bot will log the Github context, as seen from the script, to the console.
 ## Example Workflow
 ```yaml
   - name: Send result to slack 
